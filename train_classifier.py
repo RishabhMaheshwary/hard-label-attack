@@ -167,20 +167,20 @@ def main(args):
     #     if args.save_data_split:
     #         save_data(train_x, train_y, args.path, 'train')
     #         save_data(test_x, test_y, args.path, 'test')
-        train_x, train_y = dataloader.read_corpus('/data/medg/misc/jindi/nlp/datasets/mr/train.txt')
-        test_x, test_y = dataloader.read_corpus('/data/medg/misc/jindi/nlp/datasets/mr/test.txt')
+        train_x, train_y = dataloader.read_corpus('/data/datasets/mr/train.txt')
+        test_x, test_y = dataloader.read_corpus('/data/datasets/mr/test.txt')
     elif args.dataset == 'imdb':
-        train_x, train_y = dataloader.read_corpus(os.path.join('/data/medg/misc/jindi/nlp/datasets/imdb',
+        train_x, train_y = dataloader.read_corpus(os.path.join('/data/nlp/datasets/imdb',
                                                                'train_tok.csv'),
                                                   clean=False, MR=True, shuffle=True)
-        test_x, test_y = dataloader.read_corpus(os.path.join('/data/medg/misc/jindi/nlp/datasets/imdb',
+        test_x, test_y = dataloader.read_corpus(os.path.join('/data/nlp/datasets/imdb',
                                                                'test_tok.csv'),
                                                 clean=False, MR=True, shuffle=True)
     else:
-        train_x, train_y = dataloader.read_corpus('/afs/csail.mit.edu/u/z/zhijing/proj/to_di/data/{}/'
+        train_x, train_y = dataloader.read_corpus('proj/to_di/data/{}/'
                                                     'train_tok.csv'.format(args.dataset),
                                                   clean=False, MR=False, shuffle=True)
-        test_x, test_y = dataloader.read_corpus('/afs/csail.mit.edu/u/z/zhijing/proj/to_di/data/{}/'
+        test_x, test_y = dataloader.read_corpus('proj/to_di/data/{}/'
                                                     'test_tok.csv'.format(args.dataset),
                                                 clean=False, MR=False, shuffle=True)
 

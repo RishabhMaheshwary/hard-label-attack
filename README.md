@@ -1,9 +1,9 @@
-### Generating Natural Language Attack in Hard Label Black Box Setting
+### Generating Natural Language Attack in a Hard Label Black Box Setting
 
 Computing Infrastructure Used: Nvidia GeForce GTX 1080 Ti GPUs, providing 14336 CUDA cores, and 44 GB of GDDR5X VRAM
 
 
-Requirements
+#### Requirements
 -  Pytorch >= 0.4
 -  Tensorflow >= 1.0
 -  Numpy
@@ -11,15 +11,15 @@ Requirements
 - Tensorflow 2.1.0
 - TensorflowHub
 
-Dependencies
+#### Download Dependencies
 
-- Download pretrained target models for each dataset from [here](https://drive.google.com/file/d/1UChkyjrSJAVBpb3DcPwDhZUE4FuL0J25/view?usp=sharing), unzip it.
+- Download pretrained target models for each dataset [bert](https://drive.google.com/file/d/1UChkyjrSJAVBpb3DcPwDhZUE4FuL0J25/view?usp=sharing), [lstm](https://drive.google.com/drive/folders/1nnf3wrYBrSt6F3Ms10wsDTTGFodrRFEW?usp=sharing), [cnn](https://drive.google.com/drive/folders/149Y5R6GIGDpBIaJhgG8rRaOslM21aA0Q?usp=sharing) unzip it.
 
 - Download top 50 synonym file of counter-fitted-vectors from [here](https://drive.google.com/file/d/1AIz8Imvv8OmHxVwY5kx10iwKAUzD6ODx/view) and place it in the main directory.
 
 - Download the glove 200 dimensional vectors from [here](https://nlp.stanford.edu/projects/glove/) unzip it.
  
-How to Run:
+#### How to Run:
 
 Use the following command to get the results. 
 
@@ -69,5 +69,9 @@ python3 nli_attack.py \
         --sim_score_window 40
 
 ```
+#### Results
 The results will be available in **results_hard_label** directory for classification task and in **results_nli_hard_label** for entailment tasks.
 For attacking other target models look at the ```commands``` folder.
+
+#### Training target models
+To train BERT on a particular dataset use the commands provided in the `BERT` directory. For training LSTM and CNN models run the `train_classifier.py --<model_name> --<dataset>`.

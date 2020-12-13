@@ -9,7 +9,6 @@ import dataloader
 from train_classifier import Model
 from itertools import zip_longest
 import criteria
-from fuzzywuzzy import fuzz
 import random
 random.seed(0)
 import csv
@@ -551,7 +550,7 @@ def attack(fuzz_val, top_k_words, qrs, sample_index, text_ls, true_label,
             population_size = 30
             population = []
             old_syns = {}
-
+            max_replacements = defaultdict(int)
             # STEP 3: Genetic Optimization
             # Genertaes initial population by mutating the substituted indices.
             for i in range(len(changed_indices)):
@@ -561,7 +560,7 @@ def attack(fuzz_val, top_k_words, qrs, sample_index, text_ls, true_label,
                 qrs+=mut_qrs
                 if len(txt)!=0:
                     population.append(txt)
-            max_iters = 1000
+            max_iters = 100
             pop_count = 0
             attack_same = 0
             old_best_attack = random_text[:]
@@ -609,7 +608,7 @@ def attack(fuzz_val, top_k_words, qrs, sample_index, text_ls, true_label,
 
                 old_best_attack = best_attack[:]
 
-                print(str(max_changes)+" After Genetic")
+                #print(str(max_changes)+" After Genetic")
 
                 # If only 1 input word substituted return it.
                 if max_changes == 1:
@@ -644,9 +643,10 @@ def attack(fuzz_val, top_k_words, qrs, sample_index, text_ls, true_label,
                         population.append(child)
                         indices_done.append(j)
                         continue
-
+                    txt = []
                     # Mutate the childs obtained after crossover on the random index.
-                    txt, mut_qrs = mutate(changed_indices[j], text_ls, pos_ls, child, child, changed_indices,
+                    if max_replacements[changed_indices[j]] <= 25:
+                        txt, mut_qrs = mutate(changed_indices[j], text_ls, pos_ls, child, child, changed_indices,
                                             synonyms_dict, old_syns, orig_label, sim_score_window,
                                             predictor, sim_predictor, batch_size)
                     qrs+=mut_qrs
@@ -654,6 +654,7 @@ def attack(fuzz_val, top_k_words, qrs, sample_index, text_ls, true_label,
 
                     # If the input has been mutated successfully add to population for nest generation.
                     if len(txt)!=0:
+                        max_replacements[changed_indices[j]] +=1
                         population.append(txt)
                 if len(population) == 0:
                     pop_count+=1
@@ -859,10 +860,12 @@ def main():
     final_sims = []
     random_sims = []
     random_changed_rates = []
+    log_dir = "results_hard_label/"+args.target_model+"/"+args.target_dataset
+    res_dir = "results_hard_label/"+args.target_model+"/"+args.target_dataset
     log_file = "results_hard_label/"+args.target_model+"/"+args.target_dataset+"/log.txt"
     result_file = "results_hard_label/"+args.target_model+"/"+args.target_dataset+"/results_final.csv"
-    Path(log_file).mkdir(parents=True, exist_ok=True)
-    Path(result_file).mkdir(parents=True, exist_ok=True)
+    Path(log_dir).mkdir(parents=True, exist_ok=True)
+    Path(res_dir).mkdir(parents=True, exist_ok=True)
     stop_words_set = criteria.get_stopwords()
     print('Start attacking!')
 
