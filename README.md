@@ -4,9 +4,6 @@ This repository contains source code for the research work described in our AAAI
 
 [Generating Natural Language Attacks in a Hard Label Black Box Setting](https://www.researchgate.net/publication/347304785_Generating_Natural_Language_Attacks_in_a_Hard_Label_Black_Box_Setting)
 
-Computing Infrastructure Used: Nvidia GeForce GTX 1080 Ti GPUs, providing 14336 CUDA cores, and 44 GB of GDDR5X VRAM
-
-
 #### Requirements
 -  Pytorch >= 0.4
 -  Tensorflow >= 1.0
