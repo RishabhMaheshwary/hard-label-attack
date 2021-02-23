@@ -4,6 +4,27 @@ This repository contains source code for the research work described in our AAAI
 
 [Generating Natural Language Attacks in a Hard Label Black Box Setting](https://www.researchgate.net/publication/347304785_Generating_Natural_Language_Attacks_in_a_Hard_Label_Black_Box_Setting)
 
+#### The hard label attack has also been implemented in [TextAttack](https://github.com/RishabhMaheshwary/TextAttack/tree/hard_label_attack) library.
+
+Follow these steps to run the attack from the library:
+
+1. Fork the [repository](https://github.com/RishabhMaheshwary/TextAttack/tree/hard_label_attack)
+
+2. Run the following command to install it.
+
+   ```bash
+   $ cd TextAttack
+   $ pip install -e . ".[dev]"
+   
+2. Run the following command to attack `bert-base-uncased` trained on `MovieReview` dataset.
+
+   ```bash
+   $ textattack attack --recipe hard-label-attack --model bert-base-uncased-mr --num-examples 100
+
+Take a look at the `models` directory in [TextAttack](https://github.com/RishabhMaheshwary/TextAttack/tree/hard_label_attack) to run the attack across any dataset and any target model.
+
+#### Instructions for running the attack from this repository.
+
 #### Requirements
 -  Pytorch >= 0.4
 -  Tensorflow >= 1.0
