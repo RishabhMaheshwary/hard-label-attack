@@ -97,3 +97,13 @@ For attacking other target models look at the ```commands``` folder.
 
 #### Training target models
 To train BERT on a particular dataset use the commands provided in the `BERT` directory. For training LSTM and CNN models run the `train_classifier.py --<model_name> --<dataset>`.
+
+#### If you find our repository helpful, consider citing our work.
+```
+@article{maheshwary2020generating,
+  title={Generating Natural Language Attacks in a Hard Label Black Box Setting},
+  author={Maheshwary, Rishabh and Maheshwary, Saket and Pudi, Vikram},
+  journal={arXiv preprint arXiv:2012.14956},
+  year={2020}
+}
+```
